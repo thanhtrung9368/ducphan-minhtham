@@ -490,5 +490,5 @@ autoNextImage();
 const music = document.getElementById("music");
 
 setTimeout(() => {
-//   music.play();
+  music.play();
 }, 5000);
