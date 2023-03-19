@@ -370,6 +370,7 @@ $('.autoplay').slick({
     $('.gla_music_icon').on('click',function(){
             //   $('.gla_music_icon_cont').fadeToggle(); 
             window.scrollTo({ top: 0, behavior: "smooth" });
+          
           }); 
   let audio = document.getElementById("audio");
   // $(document).ready(function(){
@@ -487,8 +488,3 @@ showImage(currentIndex);
 autoNextImage();
 
 
-const music = document.getElementById("music");
-
-setTimeout(() => {
-  music.play();
-}, 5000);
