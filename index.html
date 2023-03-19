@@ -37,7 +37,6 @@
     <link href="https://app.thesimple.vn/css/addtocalendar.css" rel="stylesheet">
 
 
-
     <style type="text/css">
         :root {
             --main-color: #58595B;
@@ -68,7 +67,8 @@
     </style>
     <link rel="stylesheet" type="text/css"
         href="https://app.thesimple.vn/template-thiep/thiep-cuoi-1/css/sweetalert.css">
-    <link rel="stylesheet" type="text/css" href="https://app.thesimple.vn/template-thiep/thiep-cuoi-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/template-thiep/thiep-cuoi-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/template-thiep/thiep-cuoi-1/css/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1098.0" data-gr-ext-installed="" class="vsc-initialized">
@@ -3510,14 +3510,48 @@
                 <h3 class="text-center">Ảnh Cưới Đức & Thắm</h3>
 
                 <div class="slide-box">
-
-                    <div class="autoplay slick-initialized slick-slider">
+                    <!-- <div class="slider-container">
+                        <div class="slider">
+                          <div class="slider-track">
+                            <div class="slide">
+                                <img src="./assets/img/slick-list_02.png"
+                                alt="">
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/img/slick-list_02.png"
+                                alt="">
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/img/slick-list_02.png"
+                                alt="">
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/img/slick-list_02.png"
+                                alt="">
+                            </div>
+                          </div>
+                          <button class="slider-prevBtn">&#10094;</button>
+                          <button class="slider-nextBtn">&#10095;</button>
+                        </div>
+                      </div> -->
+                      <div class="slider-container">
+                        <img src="./assets/img/slick-list_01.png"
+                                alt="">
+                                <img src="./assets/img/slick-list_02.png"
+                                alt="">
+                                <img src="./assets/img/slick-list_03.png"
+                                alt="">
+                        <button class="prev-btn">&#10094;</button>
+                        <button class="next-btn">&#10095;</button>
+                      </div>
+                      
+                    <!-- <div class=" slick-initialized slick-slider">
                         <div class="slick-prev slick-arrow" style="display: block;"><i class="fa fa-angle-left"
                                 aria-hidden="true"></i></div>
                         <div class="slick-list draggable">
                             <div class="slick-track"
                                 style="opacity: 1; width: 4500px; transform: translate3d(-2000px, 0px, 0px);">
-                                <div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true"
+                                <div class="slick-slide " data-slick-index="-1" aria-hidden="true"
                                     tabindex="-1" style="width: 500px;">
                                     <img src="./assets/img/slick-list_01.png"
                                         alt="">
@@ -3570,7 +3604,7 @@
 
                         <div class="slick-next slick-arrow" style="display: block;"><i class="fa fa-angle-right"
                                 aria-hidden="true"></i></div>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -3621,7 +3655,7 @@
 
                 <div class="text-center mrt20">
                     <div class="addevent"
-                        data-event="{&quot;title&quot;:&quot;Lễ cưới của Chú rể Quốc Vũ và Cô dâu Kiều My&quot;,&quot;desc&quot;:&quot;Thiệp cưới Online của Chú rể Đức Phan và Cô dâu Minh Thắm.&quot;,&quot;start&quot;:&quot;2022-12-04 08:00&quot;,&quot;end&quot;:&quot;2022-12-04 11:21&quot;,&quot;location&quot;:&quot;&quot;,&quot;timezone&quot;:&quot;Asia/Bangkok&quot;}">
+                        data-event="{&quot;title&quot;:&quot;Lễ cưới của Chú rể Đức Phan và Cô dâu Minh Thắm&quot;,&quot;desc&quot;:&quot;Thiệp cưới Online của Chú rể Đức Phan và Cô dâu Minh Thắm.&quot;,&quot;start&quot;:&quot;2023-05-01 17:00&quot;,&quot;end&quot;:&quot;2023-05-01 20:00&quot;,&quot;location&quot;:&quot;&quot;,&quot;timezone&quot;:&quot;Asia/Bangkok&quot;}">
                         <span>Lưu lại sự kiện</span>
                         <ul class="cal-clients">
                             <li class="google">Google Calendar</li>
@@ -4027,7 +4061,7 @@
         <div class="module gf_module- gf_module--lg gf_module--md gf_module--sm gf_module--xs ">
             <div class="gla_music_icon">
                 <button class="btn-musicf">
-                    <i class="fa fa-music"></i>
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="gla_music_icon_cont">
@@ -4063,12 +4097,14 @@
 
 
         <div class="rsvp-data" data-link=""></div>
-        <div class="countdown-time" data-time="December 04, 2022 11:21"></div>
+        <div class="countdown-time" data-time="May 01, 2023 17:30"></div>
         <!-- /app/public/thiep-cuoi-1/css -->
         <!-- /app/public/thiep-cuoi-1/js -->
         <!-- /app/public/thiep-cuoi-1/image -->
 
-
+        <audio id="music" src="./assets/music/Ngay Dau Tien.mp3" autoplay>
+            Your browser does not support the audio element.
+          </audio>
 
     </div>
     <script src="https://app.thesimple.vn/tem_front/assets/teamplates/js/jquery.js"></script>
@@ -4089,10 +4125,10 @@
 
     <script src="https://app.thesimple.vn/js/slick.min.js"></script>
     <script src="https://app.thesimple.vn/js/addtocalendar.min.js"></script>
-    <script type="text/javascript" src="template-thiep/thiep-cuoi-1/js/style.js"></script>
+    <script type="text/javascript" src="./assets/template-thiep/thiep-cuoi-1/js/style.js"></script>
     <script type="text/javascript"
-        src="https://app.thesimple.vn/template-thiep/thiep-cuoi-1/js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="https://app.thesimple.vn/template-thiep/thiep-cuoi-1/js/stylersvp.js"></script>
+        src="./assets/template-thiep/thiep-cuoi-1/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="./assets/template-thiep/thiep-cuoi-1/js/stylersvp.js"></script>
     <script src="https://app.thesimple.vn/HTML/js/jstz.min.js"></script>
     <script type="text/javascript">
 

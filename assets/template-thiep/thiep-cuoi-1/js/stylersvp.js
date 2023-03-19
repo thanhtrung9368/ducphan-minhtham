@@ -8,6 +8,17 @@ $('.autoplay').slick({
       nextArrow: '<div class="slick-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>'
   });
   
+  
+  $('.slide-ab3').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    dot: false,
+    autoplaySpeed: 3000,  
+    prevArrow: '<div class="slick-prev arrow-sl-theme"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
+      nextArrow: '<div class="slick-next arrow-sl-theme"><i class="fa fa-angle-right" aria-hidden="true"></i></div>'
+  });
+  
   $(".option-1boxp").on('click',function(){
       $('.element-hide-rap').css('display','block');
       if(!$(this).hasClass('activep')){
@@ -59,45 +70,28 @@ $('.autoplay').slick({
       }
   });
   
-    $('.gf_button1').on('click',function(){
+  
+  
+  $('.gf_buttonrsvp').on('click',function(){
+  
+  
+  
+          let note_rsvp_ct = $('#text-rsvp').val();
+  
           // check cookie
           // let check_alert = checkCookie();
           // if(check_alert == 1){
           //   alert("ThĂ´ng tin cá»§a báº¡n Ä‘Ă£ Ä‘Æ°á»£c gá»­i Ä‘i! Vui lĂ²ng thá»­ láº¡i sau 5 phĂºt");
           //   return false;
           // }
-  
-  
-          // swal({
-          //   title: "",
-          //   text: "<div class='text-left'>Gá»­i lá»i nháº¯n hoáº·c lá»i chĂºc</div><textarea id='text-rsvp' class='form-control' rows='5'></textarea>",
-          //   html: true,
-          //   showCancelButton: true,
-          //   closeOnConfirm: false,
-          //   showLoaderOnConfirm: true,
-          //   cancelButtonText: 'KhĂ´ng',   
-          //   confirmButtonText: 'Gá»­i', 
-          //   inputPlaceholder: "Nháº­p ná»™i dung hoáº·c Ä‘á»ƒ trá»‘ng"
-          // }, function(inputValue) {
-          //     if (inputValue === false) return false;
-          //     // if (inputValue === "") {
-          //     //     swal.showInputError("You need to write something!");
-          //     //     return false
-          //     // }
-          //     // get value using textarea id
-          //     //var val = document.getElementById('text').value;
-              
-  
-          // });
-  
-          let note_rsvp_ct = $('#text-rsvp').val();
-  
           let val_EM = $(this).attr('data-email');
           let val_E = $('.gf_textfield').val();
           let val_num = $('select[name="thamdusonguoi"]').val();
           let val_friend = 1;
           let val_in = 1;
           let val_pt = $('select[name="select_pt_pt"]').val();
+  
+          let input_ptxe2 = $('input[name="input_ptxe2"]').val();
           // get check friend
           if($(".option-2").hasClass('activep')){
               val_friend = 2;
@@ -131,35 +125,42 @@ $('.autoplay').slick({
           }
   
           let current_time = d.getHours()+"h"+d.getMinutes()+" - "+day+"/"+ month +"/"+d.getFullYear();
-          let input_ptxe2 = $('input[name="input_ptxe2"]').val();
+  
           let form_data = {
+              _token: $('meta[name="csrf-token"]').attr('content'),
+              contact_id: $('.gf_buttonrsvp').attr('data-id'),
               email: val_EM,
               name: val_E,
               number: val_num,
               friend: val_friend,
-              friend_in : val_in, 
+              friend_in : val_in,
               val_pt : val_pt,
               input_ptxe2 : input_ptxe2,
-              note_rsvp_ct : note_rsvp_ct,
               currunt_href: window.location.href,
               current_time: current_time,
           };
-          $('.gf_button1').attr('disabled','disabled');
+          $('.gf_buttonrsvp').attr('disabled','disabled');
           let text_alert = $('#main-page').attr('text_alert_rsvp');
           //alert(text_alert);
+          //swal("Success...",text_alert, "success");
   
+          var formData = new FormData();
   
-          // $.ajax({
-          //     type: "GET",
-          //     url: $(".rsvp-data").attr('data-link'),
-          //     data: form_data,
-          //     dataType: 'json',
-          //     success: function (response) {
-          //       setCookie('alert_time',1,5);
-          //     }
-          // });
+          formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+          formData.append('contact_id', $('.gf_buttonrsvp').attr('data-id'));
+          formData.append('email', val_EM);
+          formData.append('name', val_E);
+          formData.append('number', val_num);
+          formData.append('friend', val_friend);
+          formData.append('friend_in', val_in); 
+          formData.append('val_pt', val_pt);
+          
+          formData.append('currunt_href', window.location.href);
+          formData.append('current_time', current_time);
+          formData.append('input_ptxe2', input_ptxe2);
   
-  
+          
+          
           swal({
             title: "",
             text: "<div class='text-left'>Gá»­i lá»i nháº¯n hoáº·c lá»i chĂºc</div><textarea id='text-rsvp' class='form-control' rows='5'></textarea>",
@@ -170,26 +171,65 @@ $('.autoplay').slick({
             closeOnCancel: true ,
           }, function(isConfirm) {
               let valxxx = document.getElementById('text-rsvp').value;
-              form_data.note_rsvp_ct = valxxx;
+              formData.append('note_rsvp_ct', valxxx);
+              
               $.ajax({
-                  type: "GET",
-                  url: $(".rsvp-data").attr('data-link'),
-                  data: form_data,
-                  dataType: 'json',
-                  success: function (response) {
-                    setCookie('alert_time',1,5);
-                    $(".sa-button-container").css('display','block');
+                 type: "POST",
+                 url: $(".gf_buttonrsvp").attr('data-link'),
+                 data: formData,
+                 dataType:"json",
+                 crossDomain: true,
+                 cache : false,
+                  processData: false,
+                  contentType: false,
+                  headers: {
+                      "X-CSRFToken": $('meta[name="csrf-token"]').attr('content'),
+                  },
+                 success: function( msg ) {
+                      setCookie('alert_time',1,5);
+                      $(".sa-button-container").css('display','block');
                       setTimeout(function(){
                           swal("Success...",text_alert, "success");
                       },700);
-                  }
-              });
-              
+                 }
+             });
+  
+              //console.log(valxxx);
+                  
+             
           });
+  
+  
+          // swal({
+          //   title: "ThĂ nh cĂ´ng",
+          //   text: text_alert,
+          //   type: "success",
+          //   confirmButtonColor: "#DD6B55",
+          //   confirmButtonText: "OK!",
+          //   closeOnConfirm: false
+          // },
+          // function(){
+  
+  
+  
+          // });
+  
+          /*$.ajax({
+              type: "GET",
+              url: $(".rsvp-data").attr('data-link'),
+              data: form_data,
+              dataType: 'json',
+              success: function (response) {
+                setCookie('alert_time',1,5);
+              }
+          });*/
+  
+          
   
           
         
     });
+  
   
     $('.gf_buttonrsvpupdate').on('click',function(){
           // check cookie
@@ -204,13 +244,11 @@ $('.autoplay').slick({
           //   text: "<div class='text-left'>Gá»­i lá»i nháº¯n hoáº·c lá»i chĂºc</div><textarea id='text-rsvp' class='form-control' rows='5'></textarea>",
           //   html: true,
           //   showCancelButton: true,
-          //   closeOnConfirm: false,
-          //   showLoaderOnConfirm: true,
           //   cancelButtonText: 'KhĂ´ng',   
           //   confirmButtonText: 'Gá»­i', 
-          //   inputPlaceholder: "Nháº­p ná»™i dung hoáº·c Ä‘á»ƒ trá»‘ng"
-          // }, function(inputValue) {
-          //     if (inputValue === false) return false;
+          //   closeOnConfirm: true,   
+          //   closeOnCancel: true ,
+          // }, function(isConfirm) {
           //     // if (inputValue === "") {
           //     //     swal.showInputError("You need to write something!");
           //     //     return false
@@ -221,7 +259,6 @@ $('.autoplay').slick({
   
           // });
   
-          let note_rsvp_ct = $('#text-rsvp').val();
   
           let val_EM = $(this).attr('data-email');
           let val_E = $('.gf_textfield').val();
@@ -229,7 +266,6 @@ $('.autoplay').slick({
           let val_friend = 1;
           let val_in = 1;
           let val_pt = $('select[name="select_pt_pt"]').val();
-          let input_ptxe2 = $('input[name="input_ptxe2"]').val();
           // get check friend
           if($(".option-2").hasClass('activep')){
               val_friend = 2;
@@ -263,7 +299,7 @@ $('.autoplay').slick({
           }
   
           let current_time = d.getHours()+"h"+d.getMinutes()+" - "+day+"/"+ month +"/"+d.getFullYear();
-  
+          let input_ptxe2 = $('input[name="input_ptxe2"]').val();
           let form_data = {
               _token: $('meta[name="csrf-token"]').attr('content'),
               contact_id: $('.gf_buttonrsvpupdate').attr('data-id'),
@@ -292,6 +328,9 @@ $('.autoplay').slick({
               }
           });*/
   
+  
+          let note_rsvp_ct = $('#text-rsvp').val();
+  
           var formData = new FormData();
   
           formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
@@ -305,6 +344,7 @@ $('.autoplay').slick({
           formData.append('val_pt', val_pt);
           formData.append('input_ptxe2', input_ptxe2);
           formData.append('is_update', '1');
+          
           formData.append('currunt_href', window.location.href);
           formData.append('current_time', current_time);
   
@@ -325,6 +365,7 @@ $('.autoplay').slick({
           //    }
           // });
   
+          
           swal({
             title: "",
             text: "<div class='text-left'>Gá»­i lá»i nháº¯n hoáº·c lá»i chĂºc</div><textarea id='text-rsvp' class='form-control' rows='5'></textarea>",
@@ -355,47 +396,38 @@ $('.autoplay').slick({
                           swal("Success...",text_alert, "success");
                       },700);
                  }
-             });
+              });
   
-  
-              //console.log(valxxx);
-                  
-             
           });
   
-          
-        
+        console.log
     });
   
     $('.gla_music_icon').on('click',function(){
-            //   $('.gla_music_icon_cont').fadeToggle(); 
-            window.scrollTo({ top: 0, behavior: "smooth" });
+              $('.gla_music_icon_cont').fadeToggle(); 
           }); 
+  
+  
   let audio = document.getElementById("audio");
   // $(document).ready(function(){
   //     let audio = document.getElementById("audio");
-     
+  //     //console.log(audio);
   //     if(audio){
   //         audio.play().then(()=>audio.pause());
   //         // now we can do whatever we want at any time with this MediaElement
   //         setTimeout(()=> audio.play(), 3000);
   //     }
-      
   // });
-  
   $(".btn-play-audio").on('click',function(){
-      //let audio = document.getElementById("audio");
-      //console.log(audio);
+      
       if($(".btn-play-audio").find(".fa").hasClass('after-slash')){
           $(".btn-play-audio").find(".fa").removeClass('after-slash');
           audio.play()
-          //console.log(audio.src)
       }else{
           $(".btn-play-audio").find(".fa").addClass('after-slash');
           audio.pause();
       }
   }); 
-  
   
     $('.addevent').addToCalendar({
             filename: 'myicalendar',
@@ -446,49 +478,3 @@ $('.autoplay').slick({
       else
           return false;
   }
-
-  
-
-// Add
-const sliderImages = document.querySelectorAll('.slider-container img');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-
-let currentIndex = 0;
-let intervalId;
-
-function showImage(index) {
-  sliderImages.forEach(image => {
-    image.style.transform = `translateX(-${index * 100}%)`;
-  });
-}
-
-function autoNextImage() {
-  clearInterval(intervalId);
-  intervalId = setInterval(() => {
-    currentIndex = (currentIndex + 1) % sliderImages.length;
-    showImage(currentIndex);
-  }, 5000);
-}
-
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-  showImage(currentIndex);
-  autoNextImage();
-});
-
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % sliderImages.length;
-  showImage(currentIndex);
-  autoNextImage();
-});
-
-showImage(currentIndex);
-autoNextImage();
-
-
-const music = document.getElementById("music");
-
-setTimeout(() => {
-//   music.play();
-}, 5000);
